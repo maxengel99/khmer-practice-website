@@ -2,13 +2,13 @@ import React from "react";
 import "./App.css";
 
 import FixedNavbar from "./components/FixedNavbar";
-import Audio from "./components/Audio";
+import QuizArea from "./components/QuizArea";
 
 function App() {
   return (
     <div className="App">
       <FixedNavbar />
-      <Audio />
+      <QuizArea />
     </div>
   );
 }
