@@ -5,7 +5,7 @@ export class Audio extends Component {
     return (
       <div>
         <audio controls>
-          <source src="/media" type="audio/ogg" />
+          <source src={`/media?word=${this.props.word}`} type="audio/ogg" />
         </audio>
       </div>
     );
