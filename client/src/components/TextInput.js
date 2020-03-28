@@ -18,8 +18,8 @@ export class TextInput extends Component {
   }
 
   keyPress(e) {
-    if (e.keyCode == 13) {
-      if (this.state.input == this.props.word) {
+    if (e.keyCode === 13) {
+      if (this.state.input === this.props.word) {
         this.props.onSubmitAnswer({ answerValue: true });
       } else {
         this.props.onSubmitAnswer({ answerValue: false });
@@ -28,9 +28,24 @@ export class TextInput extends Component {
   }
 
   render() {
+    const inputStyle = {
+      width: "100%",
+      height: "3em",
+      lineHeight: "1em",
+      fontSize: "1.5em",
+      boxShadow: "3px 3px 0 #e1e1e1",
+      boxSizing: "border-box",
+      textAlign: "center"
+    };
+
+    const containerStyle = {
+      padding: "10px"
+    };
+
     return (
-      <div className="form-group">
+      <div className="form-group" style={containerStyle}>
         <input
+          style={inputStyle}
           onKeyDown={this.keyPress}
           type="text"
           className="form-control"
