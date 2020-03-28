@@ -10,7 +10,19 @@ export class Audio extends Component {
   }
 
   componentDidMount() {
-    console.log("new audio");
+    document.addEventListener("keydown", e => {
+      if (e.keyCode === 32) {
+        this.refs.audio.play();
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", e => {
+      if (e.keyCode === 32) {
+        this.refs.audio.play();
+      }
+    });
   }
 
   componentWillReceiveProps(nextProps) {

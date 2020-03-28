@@ -26,7 +26,7 @@ export class QuizArea extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_prevProps, prevState) {
     if (prevState.didAnswer !== this.state.didAnswer) {
       if (this.state.didAnswer) {
         document.addEventListener("keydown", this.handleKeyDown);
