@@ -28,7 +28,7 @@ export class TextInput extends Component {
   }
 
   render() {
-    const inputStyle = {
+    const inputStyleBasic = {
       width: "100%",
       height: "3em",
       lineHeight: "1em",
@@ -37,6 +37,45 @@ export class TextInput extends Component {
       boxSizing: "border-box",
       textAlign: "center"
     };
+
+    const inputStyleCorrect = {
+      width: "100%",
+      height: "3em",
+      lineHeight: "1em",
+      fontSize: "1.5em",
+      boxShadow: "3px 3px 0 #e1e1e1",
+      boxSizing: "border-box",
+      textAlign: "center",
+      transition: "backgroud-color 0.1s ease-in",
+      backgroundColor: "#88cc00",
+      opacity: "1"
+    };
+
+    const inputStyleWrong = {
+      width: "100%",
+      height: "3em",
+      lineHeight: "1em",
+      fontSize: "1.5em",
+      boxShadow: "3px 3px 0 #e1e1e1",
+      boxSizing: "border-box",
+      textAlign: "center",
+      transition: "backgroud-color 0.1s ease-in",
+      backgroundColor: "#f03",
+      opacity: "1"
+    };
+
+    let inputStyle;
+    console.log(this.props);
+
+    if (!this.props.disabled) {
+      inputStyle = inputStyleBasic;
+    } else {
+      if (this.props.correct) {
+        inputStyle = inputStyleCorrect;
+      } else {
+        inputStyle = inputStyleWrong;
+      }
+    }
 
     const containerStyle = {
       padding: "10px"
@@ -53,6 +92,7 @@ export class TextInput extends Component {
           placeholder="ចម្លើយ"
           value={this.state.input}
           onChange={this.handleChange}
+          disabled={this.props.disabled}
         />
       </div>
     );

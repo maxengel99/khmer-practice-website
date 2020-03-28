@@ -8,11 +8,18 @@ export class QuizArea extends Component {
     super(props);
     this.state = {
       word: WordsArray[Math.floor(Math.random() * WordsArray.length)],
-      answer: false,
-      correct: null
+      didAnswer: false,
+      correct: false
     };
     this.updateWord = this.updateWord.bind(this);
     this.handleAnswer = this.handleAnswer.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.state.didAnswer) {
+      if (this.state.correct) {
+      }
+    }
   }
 
   updateWord() {
@@ -22,7 +29,7 @@ export class QuizArea extends Component {
   }
 
   handleAnswer = answerValue => {
-    this.setState({ answer: true, correct: answerValue });
+    this.setState({ didAnswer: true, correct: answerValue.answerValue });
     console.log(answerValue.answerValue);
   };
 
@@ -30,7 +37,12 @@ export class QuizArea extends Component {
     return (
       <div>
         <Audio word={this.state.word} />
-        <TextInput onSubmitAnswer={this.handleAnswer} word={this.state.word} />
+        <TextInput
+          onSubmitAnswer={this.handleAnswer}
+          word={this.state.word}
+          disabled={this.state.didAnswer}
+          correct={this.state.correct}
+        />
       </div>
     );
   }
