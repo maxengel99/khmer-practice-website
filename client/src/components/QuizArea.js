@@ -13,11 +13,25 @@ export class QuizArea extends Component {
     };
     this.updateWord = this.updateWord.bind(this);
     this.handleAnswer = this.handleAnswer.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  componentDidUpdate() {
-    if (this.state.didAnswer) {
-      if (this.state.correct) {
+  handleKeyDown(e) {
+    if (e.keyCode === 13) {
+      this.setState({
+        word: WordsArray[Math.floor(Math.random() * WordsArray.length)],
+        didAnswer: false,
+        correct: false
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.didAnswer !== this.state.didAnswer) {
+      if (this.state.didAnswer) {
+        document.addEventListener("keydown", this.handleKeyDown);
+      } else {
+        document.removeEventListener("keydown", this.handleKeyDown);
       }
     }
   }
@@ -30,7 +44,6 @@ export class QuizArea extends Component {
 
   handleAnswer = answerValue => {
     this.setState({ didAnswer: true, correct: answerValue.answerValue });
-    console.log(answerValue.answerValue);
   };
 
   render() {

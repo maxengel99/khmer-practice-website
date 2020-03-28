@@ -3,14 +3,10 @@ import React, { Component } from "react";
 export class TextInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { input: "" };
+    this.state = { input: "", word: this.props.word };
 
     this.handleChange = this.handleChange.bind(this);
     this.keyPress = this.keyPress.bind(this);
-  }
-
-  componentDidMount() {
-    console.log(this.props.word);
   }
 
   handleChange({ target }) {
@@ -24,6 +20,14 @@ export class TextInput extends Component {
       } else {
         this.props.onSubmitAnswer({ answerValue: false });
       }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.word !== this.state.word) {
+      this.setState({
+        input: ""
+      });
     }
   }
 
@@ -65,7 +69,6 @@ export class TextInput extends Component {
     };
 
     let inputStyle;
-    console.log(this.props);
 
     if (!this.props.disabled) {
       inputStyle = inputStyleBasic;
