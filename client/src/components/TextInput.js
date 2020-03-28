@@ -26,7 +26,8 @@ export class TextInput extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.word !== this.state.word) {
       this.setState({
-        input: ""
+        input: "",
+        word: nextProps.word
       });
     }
   }

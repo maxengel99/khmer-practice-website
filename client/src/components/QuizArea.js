@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Audio from "./Audio";
 import TextInput from "./TextInput";
+import CorrectAnswer from "./CorrectAnswer";
 import { WordsArray } from "../word-list";
 
 export class QuizArea extends Component {
@@ -11,7 +12,6 @@ export class QuizArea extends Component {
       didAnswer: false,
       correct: false
     };
-    this.updateWord = this.updateWord.bind(this);
     this.handleAnswer = this.handleAnswer.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
@@ -36,12 +36,6 @@ export class QuizArea extends Component {
     }
   }
 
-  updateWord() {
-    this.setState({
-      word: WordsArray[Math.floor(Math.random() * WordsArray.length)]
-    });
-  }
-
   handleAnswer = answerValue => {
     this.setState({ didAnswer: true, correct: answerValue.answerValue });
   };
@@ -55,6 +49,10 @@ export class QuizArea extends Component {
           word={this.state.word}
           disabled={this.state.didAnswer}
           correct={this.state.correct}
+        />
+        <CorrectAnswer
+          show={this.state.didAnswer && !this.state.correct}
+          correctAnswer={this.state.word}
         />
       </div>
     );
