@@ -8,7 +8,7 @@ import history from "./auth0/history";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-  const { loading } = useAuth0();
+  const { loading, user } = useAuth0();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -19,7 +19,10 @@ function App() {
       <Router history={history}>
         <Switch>
           <Route path="/" exact component={Auth0NavBar} />
-          <PrivateRoute path="/practice" component={QuizArea} />
+          <PrivateRoute
+            path="/practice"
+            component={() => <QuizArea user={user} />}
+          />
         </Switch>
       </Router>
     </div>

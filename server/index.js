@@ -1,11 +1,13 @@
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
 var firebase = require("firebase");
+const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
 const app = express();
+
+app.use(bodyParser.json());
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
@@ -31,7 +33,6 @@ app.get("/api/getList", (req, res) => {
 app.get("/media", (req, res) => {
   console.log("getting media file");
   console.log(req.query.word);
-  //fs.createReadStream('song.mp3').pipe(res);});
   res.sendFile(path.join(__dirname + "/audio/" + req.query.word + ".mp3"));
 });
 
@@ -42,6 +43,16 @@ app.get("/test", (req, res) => {
     .database()
     .ref("/TestMessages")
     .set({ TestMessage: "GET Request 3" });
+});
+
+app.post("/user", (req, res) => {
+  console.log("Adding user if user does not exist");
+  firebase
+    .database()
+    .ref("/users/" + req.body.email)
+    .set({
+      name: req.body.name
+    });
 });
 
 // Handles any requests that don't match the ones above

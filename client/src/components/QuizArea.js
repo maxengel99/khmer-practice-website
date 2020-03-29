@@ -17,6 +17,21 @@ export class QuizArea extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
+  async componentDidMount() {
+    console.log(this.props.user);
+    let fixedEmail = this.props.user.email.replace(".", "-");
+    console.log(this.props.user.name);
+    const response = await fetch("/user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: fixedEmail,
+        name: this.props.user.name
+      })
+    });
+    console.log(await response);
+  }
+
   handleKeyDown(e) {
     if (e.keyCode === 13) {
       this.setState({
