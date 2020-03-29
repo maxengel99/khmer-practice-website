@@ -10,12 +10,15 @@ import history from "./auth0/history";
 // A function that routes the user to the right place
 // after login
 const onRedirectCallback = appState => {
+  console.log(appState);
+  console.log(window.location.pathname);
   history.push(
-    appState && appState.targetUrl
-      ? appState.targetUrl
-      : window.location.pathname
+    appState && appState.targetUrl ? appState.targetUrl : "/practice"
   );
 };
+
+console.log("redirect uri");
+console.log(window.location.origin);
 
 ReactDOM.render(
   <Auth0Provider

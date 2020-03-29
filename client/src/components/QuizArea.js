@@ -3,6 +3,7 @@ import Audio from "./Audio";
 import TextInput from "./TextInput";
 import CorrectAnswer from "./CorrectAnswer";
 import { WordsArray } from "../word-list";
+import FixedNavbar from "./FixedNavbar";
 
 export class QuizArea extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ export class QuizArea extends Component {
   render() {
     return (
       <div>
+        <FixedNavbar />
         <Audio word={this.state.word} />
         <TextInput
           onSubmitAnswer={this.handleAnswer}

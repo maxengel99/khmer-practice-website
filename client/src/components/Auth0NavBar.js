@@ -45,23 +45,6 @@ const Auth0NavBar = () => {
     paddingTop: "13px"
   };
 
-  const loginWrapperStyle = {
-    position: "absolute",
-    zIndex: "-1",
-    width: "300%",
-    height: "100%",
-    background: "#a64bf4",
-    background:
-      "-webkit-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff)",
-    background: "-o-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff)",
-    background:
-      "-moz-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff)",
-    background: "linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff)",
-    top: "0",
-    left: "-100%",
-    transition: "all 0.4s"
-  };
-
   const buttonStyle = {
     fontSize: "15px",
     color: "#fff",

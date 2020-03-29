@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import Auth0NavBar from "./components/Auth0NavBar";
 import { useAuth0 } from "./auth0/react-auth0-spa";
-import FixedNavbar from "./components/FixedNavbar";
 import QuizArea from "./components/QuizArea";
 import { Router, Route, Switch } from "react-router-dom";
 import Profile from "./components/Profile";
@@ -21,7 +20,7 @@ function App() {
       <Router history={history}>
         <Switch>
           <Route path="/" exact component={Auth0NavBar} />
-          <PrivateRoute path="/profile" component={QuizArea} />
+          <PrivateRoute path="/practice" component={QuizArea} />
         </Switch>
       </Router>
     </div>
