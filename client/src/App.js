@@ -18,13 +18,9 @@ function App() {
 
   return (
     <div className="App">
-      {/* Don't forget to include the history module */}
       <Router history={history}>
-        <header>
-          <Auth0NavBar />
-        </header>
         <Switch>
-          <Route path="/" exact />
+          <Route path="/" exact component={Auth0NavBar} />
           <PrivateRoute path="/profile" component={QuizArea} />
         </Switch>
       </Router>
