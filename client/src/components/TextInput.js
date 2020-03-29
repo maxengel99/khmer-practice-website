@@ -65,7 +65,7 @@ export class TextInput extends Component {
       boxSizing: "border-box",
       textAlign: "center",
       transition: "backgroud-color 0.1s ease-in",
-      backgroundColor: "#f03",
+      backgroundColor: "#E00025",
       opacity: "1"
     };
 
