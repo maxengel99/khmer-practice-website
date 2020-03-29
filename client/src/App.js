@@ -4,7 +4,6 @@ import Auth0NavBar from "./components/Auth0NavBar";
 import { useAuth0 } from "./auth0/react-auth0-spa";
 import QuizArea from "./components/QuizArea";
 import { Router, Route, Switch } from "react-router-dom";
-import Profile from "./components/Profile";
 import history from "./auth0/history";
 import PrivateRoute from "./components/PrivateRoute";
 

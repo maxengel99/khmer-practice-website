@@ -2,12 +2,7 @@ import React from "react";
 import { useAuth0 } from "../auth0/react-auth0-spa";
 
 const Auth0NavBar = () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
-  const limiter = {
-    width: "100%",
-    margin: "0 auto"
-  };
+  const { loginWithRedirect } = useAuth0();
 
   const containerLogin = {
     width: "100%",
@@ -78,5 +73,3 @@ const Auth0NavBar = () => {
 };
 
 export default Auth0NavBar;
-
-//{isAuthenticated && <button onClick={() => logout()}>Log out</button>}
