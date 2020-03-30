@@ -5,7 +5,7 @@
         "function": "app"
       },
       {
-        "source": "/test",
+        "source": "/user",
         "function": "app"
       }
     ],
