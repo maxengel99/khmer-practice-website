@@ -1,0 +1,14 @@
+{
+  "functions": {
+    "rewrites:": [{
+        "source": "/api/getList",
+        "function": "app"
+      },
+      {
+        "source": "/test",
+        "function": "app"
+      }
+    ],
+    "source": "."
+  }
+}
