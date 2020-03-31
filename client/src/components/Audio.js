@@ -50,7 +50,14 @@ export class Audio extends Component {
     return (
       <div style={style}>
         <audio controls ref="audio">
-          <source src={this.state.url} type="audio/ogg" />
+          <source
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/khmer-practice-website.appspot.com/o/" +
+              this.props.word +
+              ".mp3?alt=media"
+            }
+            type="audio/ogg"
+          />
         </audio>
       </div>
     );
