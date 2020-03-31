@@ -10,8 +10,8 @@ A single-page app to help you practice listening to Khmer vocabulary.
 
 ![screenshot](screenshots/welcome.png)
 
-![screenshot](screenshots/main.png)
-![screenshot](screenshots/correct.png)
+![screenshot](screenshots/main-crop.png)
+![screenshot](screenshots/correct-crop.png)
 
 ### The Need
 
