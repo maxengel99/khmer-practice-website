@@ -4,6 +4,7 @@ import TextInput from "./TextInput";
 import CorrectAnswer from "./CorrectAnswer";
 import { WordsArray } from "../word-list2";
 import FixedNavbar from "./FixedNavbar";
+import Definition from "./Definition";
 
 const khmer_words = Object.keys(WordsArray);
 
@@ -69,6 +70,10 @@ export class QuizArea extends Component {
         <CorrectAnswer
           show={this.state.didAnswer && !this.state.correct}
           correctAnswer={this.state.word}
+        />
+        <Definition
+          show={this.state.didAnswer}
+          definition={WordsArray[this.state.word]}
         />
       </div>
     );
