@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import Audio from "./Audio";
 import TextInput from "./TextInput";
 import CorrectAnswer from "./CorrectAnswer";
-import { WordsArray } from "../word-list";
+import { WordsArray } from "../word-list2";
 import FixedNavbar from "./FixedNavbar";
+
+const khmer_words = Object.keys(WordsArray);
 
 export class QuizArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      word: WordsArray[Math.floor(Math.random() * WordsArray.length)],
+      word: khmer_words[parseInt(Math.random() * khmer_words.length)],
       didAnswer: false,
       correct: false
     };
@@ -18,10 +20,8 @@ export class QuizArea extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props.user);
     let fixedEmail = this.props.user.email.replace(".", "-");
-    console.log(this.props.user.name);
-    const response = await fetch("/user", {
+    await fetch("/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -29,13 +29,12 @@ export class QuizArea extends Component {
         name: this.props.user.name
       })
     });
-    console.log(await response);
   }
 
   handleKeyDown(e) {
     if (e.keyCode === 13) {
       this.setState({
-        word: WordsArray[Math.floor(Math.random() * WordsArray.length)],
+        word: khmer_words[parseInt(Math.random() * khmer_words.length)],
         didAnswer: false,
         correct: false
       });

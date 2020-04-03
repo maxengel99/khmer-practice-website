@@ -1,4 +1,4 @@
-export const word_list = {
+export const WordsArray = {
   នឹក: "to miss",
   គិត: "to think, to intend to",
   ក: "neck",
