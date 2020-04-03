@@ -9,22 +9,6 @@ export class Audio extends Component {
     };
   }
 
-  componentDidMount() {
-    document.addEventListener("keydown", e => {
-      if (e.keyCode === 32) {
-        this.refs.audio.play();
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keydown", e => {
-      if (e.keyCode === 32) {
-        this.refs.audio.play();
-      }
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
     if (this.props.word !== nextProps.word) {
       this.setState(
@@ -34,6 +18,7 @@ export class Audio extends Component {
         function() {
           this.refs.audio.pause();
           this.refs.audio.load();
+          this.refs.audio.play();
         }
       );
     }
@@ -52,9 +37,9 @@ export class Audio extends Component {
         <audio controls ref="audio">
           <source
             src={
-              "https://firebasestorage.googleapis.com/v0/b/khmer-practice-website.appspot.com/o/" +
+              "https://kheng.info/static/dictionary/audio/" +
               this.props.word +
-              ".mp3?alt=media"
+              ".mp3"
             }
             type="audio/ogg"
           />
