@@ -62,7 +62,7 @@ const SignIn = () => {
         <span style={titleStyle}>Welcome</span>
         <div style={buttonWrapperStyle}>
           <button style={buttonStyle} onClick={() => signInWithRedirect()}>
-            login
+            login with gmail
           </button>
         </div>
       </div>

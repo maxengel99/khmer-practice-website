@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const user = useContext(UserContext);
-  console.log(user);
+
   return user ? (
     <div className="App">
       <Router>

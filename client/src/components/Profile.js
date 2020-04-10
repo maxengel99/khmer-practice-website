@@ -15,27 +15,72 @@ export class Profile extends Component {
   }
 
   render() {
+    const cardStyle = {
+      boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
+      maxWidth: "500px",
+      margin: "auto",
+      marginTop: "20px",
+      padding: "5px",
+      textAlign: "center",
+      fontFamily: "arial",
+    };
+
+    const titleStyle = {
+      color: "grey",
+      fontSize: "18px",
+    };
+
+    const imgStyle = {
+      width: "40%",
+      borderRadius: "50%",
+      margin: "auto",
+    };
+
+    const headerStyle = {
+      marginTop: "10px",
+    };
+
+    const buttonStyle = {
+      fontSize: "15px",
+      color: "#fff",
+      lineHeight: "1.2",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      float: "right",
+      margin: "10px",
+      padding: "0 20px",
+      width: "20%",
+      height: "50px",
+      borderRadius: "10px",
+      background: "rgba(0, 0, 0, 0.2)",
+      border: "none",
+    };
+
+    const paragraphStyle = {
+      margin: "2px",
+      textAlign: "left",
+    };
+
     return (
-      <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
-        <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
-          <div
-            style={{
-              background: `url(${this.context.photoURL})  no-repeat center center`,
-              backgroundSize: "cover",
-              height: "200px",
-              width: "200px",
-            }}
-            className="border border-blue-300"
-          ></div>
-          <div className="md:pl-4">
-            <h2 className="text-2xl font-semibold">
-              {this.context.displayName}
-            </h2>
-            <h3 className="italic">{this.context.email}</h3>
-          </div>
-        </div>
+      <div class="card" style={cardStyle}>
+        <img src={this.context.photoURL} alt="Profile" style={imgStyle} />
+        <h1 style={headerStyle}>{this.context.displayName}</h1>
+        <p class="title" style={titleStyle}>
+          {this.context.email}
+        </p>
+        <p style={paragraphStyle}>
+          Total Answers: {this.state.correct + this.state.incorrect}
+        </p>
+        <p style={paragraphStyle}>
+          Percent Correct:{" "}
+          {this.state.correct !== 0
+            ? (this.state.correct + this.state.incorrect) / this.state.correct
+            : 0}
+          {"%"}
+        </p>
         <button
-          className="w-full py-3 bg-red-600 mt-4 text-white"
+          style={buttonStyle}
           onClick={() => {
             auth.signOut();
             window.location.href = "/";
