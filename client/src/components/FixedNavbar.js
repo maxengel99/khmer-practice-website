@@ -1,53 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
-import Popup from "reactjs-popup";
-import Button from "react-bootstrap/Button";
 import { UserContext } from "../providers/UserProvider";
 
 const FixedNavbar = () => {
   const user = useContext(UserContext);
 
   const imgStyle = {
-    margin: "5px",
-    borderRadius: "50%",
-  };
-
-  const modalStyle = {
-    fontSize: "12px",
-  };
-
-  const closeStyle = {
-    cursor: "pointer",
-    position: "absolute",
-    display: "block",
-    padding: "2px 5px",
-    lineHeight: "20px",
-    right: "-10px",
-    top: "-10px",
-    fontSize: "24px",
-    background: "#ffffff",
-    borderRadius: "18px",
-    border: "1px solid #cfcece",
-  };
-
-  const headerStyle = {
-    width: "100%",
-    borderBottom: "1px solid gray",
-    fontSize: "18px",
-    textAlign: "center",
-    padding: "5px",
-  };
-
-  const actionsStyle = {
-    width: "100%",
-    padding: "10px 5px",
-    margin: "auto",
-    textAlign: "center",
-  };
-
-  const buttonStyle = {
     margin: "10px",
+    borderRadius: "50%",
   };
 
   return (
@@ -56,35 +17,10 @@ const FixedNavbar = () => {
         <Navbar.Brand>Learn Khmer!</Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as:
-            <Popup
-              trigger={<b> {user.displayName}</b>}
-              modal
-              position="top right"
-            >
-              {(close) => (
-                <div style={modalStyle}>
-                  <a style={closeStyle} onClick={close}>
-                    &times;
-                  </a>
-                  <div style={headerStyle}>Would you like to logout?</div>
-                  <div style={actionsStyle}>
-                    <Button style={buttonStyle} variant="secondary">
-                      Yes
-                    </Button>
-                    <Button
-                      style={buttonStyle}
-                      variant="secondary"
-                      onClick={() => {
-                        close();
-                      }}
-                    >
-                      No
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </Popup>
+            Signed in as:{" "}
+            <Link to="/profile">
+              <b>{user.displayName}</b>
+            </Link>
           </Navbar.Text>
           <Navbar.Brand>
             <img
@@ -96,9 +32,6 @@ const FixedNavbar = () => {
               alt="Profile"
             />
           </Navbar.Brand>
-          <Navbar.Text>
-            <Link to="/profile">Profile</Link>
-          </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
     </div>

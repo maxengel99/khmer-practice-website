@@ -4,22 +4,24 @@ import SignIn from "./components/SignIn";
 import QuizArea from "./components/QuizArea";
 import Profile from "./components/Profile";
 import { UserContext } from "./providers/UserProvider";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const user = useContext(UserContext);
   console.log(user);
   return user ? (
-    <Router>
-      <Switch>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-        <Route path="/">
-          <QuizArea />
-        </Route>
-      </Switch>
-    </Router>
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/">
+            <QuizArea />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   ) : (
     <SignIn />
   );

@@ -6,7 +6,6 @@ import FixedNavbar from "./FixedNavbar";
 import Definition from "./Definition";
 import { WordsArray } from "../word-list";
 import { UserContext } from "../providers/UserProvider";
-import { auth } from "../providers/Firebase.js";
 
 const khmer_words = Object.keys(WordsArray);
 
@@ -22,11 +21,6 @@ export class QuizArea extends Component {
     };
     this.handleAnswer = this.handleAnswer.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
-
-  componentDidMount() {
-    const user = this.context;
-    console.log(user);
   }
 
   handleKeyDown(e) {
@@ -72,13 +66,6 @@ export class QuizArea extends Component {
           show={this.state.didAnswer}
           definition={WordsArray[this.state.word]}
         />
-        <button
-          onClick={() => {
-            auth.signOut();
-          }}
-        >
-          Sign Out
-        </button>
       </div>
     );
   }

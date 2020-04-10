@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../providers/Firebase";
 
