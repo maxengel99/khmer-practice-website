@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
-import { useAuth0 } from "../auth0/react-auth0-spa";
 import Popup from "reactjs-popup";
 import Button from "react-bootstrap/Button";
+import { UserContext } from "../providers/UserProvider";
 
 const FixedNavbar = () => {
-  const { user, logout } = useAuth0();
+  const user = useContext(UserContext);
 
   const imgStyle = {
     margin: "5px",
-    borderRadius: "50%"
+    borderRadius: "50%",
   };
 
   const modalStyle = {
-    fontSize: "12px"
+    fontSize: "12px",
   };
 
   const closeStyle = {
@@ -27,7 +28,7 @@ const FixedNavbar = () => {
     fontSize: "24px",
     background: "#ffffff",
     borderRadius: "18px",
-    border: "1px solid #cfcece"
+    border: "1px solid #cfcece",
   };
 
   const headerStyle = {
@@ -35,18 +36,18 @@ const FixedNavbar = () => {
     borderBottom: "1px solid gray",
     fontSize: "18px",
     textAlign: "center",
-    padding: "5px"
+    padding: "5px",
   };
 
   const actionsStyle = {
     width: "100%",
     padding: "10px 5px",
     margin: "auto",
-    textAlign: "center"
+    textAlign: "center",
   };
 
   const buttonStyle = {
-    margin: "10px"
+    margin: "10px",
   };
 
   return (
@@ -56,21 +57,19 @@ const FixedNavbar = () => {
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
             Signed in as:
-            <Popup trigger={<b> {user.name}</b>} modal position="top right">
-              {close => (
+            <Popup
+              trigger={<b> {user.displayName}</b>}
+              modal
+              position="top right"
+            >
+              {(close) => (
                 <div style={modalStyle}>
                   <a style={closeStyle} onClick={close}>
                     &times;
                   </a>
                   <div style={headerStyle}>Would you like to logout?</div>
                   <div style={actionsStyle}>
-                    <Button
-                      style={buttonStyle}
-                      variant="secondary"
-                      onClick={() => {
-                        logout();
-                      }}
-                    >
+                    <Button style={buttonStyle} variant="secondary">
                       Yes
                     </Button>
                     <Button
@@ -89,7 +88,7 @@ const FixedNavbar = () => {
           </Navbar.Text>
           <Navbar.Brand>
             <img
-              src={user.picture}
+              src={user.photoURL}
               width="30"
               height="30"
               className="d-inline-block align-top"
@@ -97,6 +96,9 @@ const FixedNavbar = () => {
               alt="Profile"
             />
           </Navbar.Brand>
+          <Navbar.Text>
+            <Link to="/profile">Profile</Link>
+          </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
     </div>

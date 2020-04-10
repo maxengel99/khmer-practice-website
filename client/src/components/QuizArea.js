@@ -2,34 +2,31 @@ import React, { Component } from "react";
 import Audio from "./Audio";
 import TextInput from "./TextInput";
 import CorrectAnswer from "./CorrectAnswer";
-import { WordsArray } from "../word-list2";
 import FixedNavbar from "./FixedNavbar";
 import Definition from "./Definition";
+import { WordsArray } from "../word-list";
+import { UserContext } from "../providers/UserProvider";
+import { auth } from "../providers/Firebase.js";
 
 const khmer_words = Object.keys(WordsArray);
 
 export class QuizArea extends Component {
+  static contextType = UserContext;
+
   constructor(props) {
     super(props);
     this.state = {
       word: khmer_words[parseInt(Math.random() * khmer_words.length)],
       didAnswer: false,
-      correct: false
+      correct: false,
     };
     this.handleAnswer = this.handleAnswer.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  async componentDidMount() {
-    let fixedEmail = this.props.user.email.replace(".", "-");
-    await fetch("/user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: fixedEmail,
-        name: this.props.user.name
-      })
-    });
+  componentDidMount() {
+    const user = this.context;
+    console.log(user);
   }
 
   handleKeyDown(e) {
@@ -37,7 +34,7 @@ export class QuizArea extends Component {
       this.setState({
         word: khmer_words[parseInt(Math.random() * khmer_words.length)],
         didAnswer: false,
-        correct: false
+        correct: false,
       });
     }
   }
@@ -52,7 +49,7 @@ export class QuizArea extends Component {
     }
   }
 
-  handleAnswer = answerValue => {
+  handleAnswer = (answerValue) => {
     this.setState({ didAnswer: true, correct: answerValue.answerValue });
   };
 
@@ -75,6 +72,13 @@ export class QuizArea extends Component {
           show={this.state.didAnswer}
           definition={WordsArray[this.state.word]}
         />
+        <button
+          onClick={() => {
+            auth.signOut();
+          }}
+        >
+          Sign Out
+        </button>
       </div>
     );
   }

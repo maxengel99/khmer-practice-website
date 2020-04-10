@@ -1,9 +1,7 @@
 import React from "react";
-import { useAuth0 } from "../auth0/react-auth0-spa";
+import { signInWithRedirect } from "../providers/Firebase.js";
 
-const Auth0NavBar = () => {
-  const { loginWithRedirect } = useAuth0();
-
+const SignIn = () => {
   const containerLogin = {
     width: "100%",
     minHeight: "100vh",
@@ -12,7 +10,7 @@ const Auth0NavBar = () => {
     justifyContent: "center",
     alignItems: "center",
     padding: "15px",
-    background: "#f2f2f2"
+    background: "#f2f2f2",
   };
 
   const wrapperStyle = {
@@ -21,7 +19,7 @@ const Auth0NavBar = () => {
     borderRadius: "10px",
     overflow: "hidden",
     padding: "77px 55px 33px 55px",
-    boxShadow: "0 5px 10px 0px rgba(0, 0, 0, 0.1)"
+    boxShadow: "0 5px 10px 0px rgba(0, 0, 0, 0.1)",
   };
 
   const titleStyle = {
@@ -30,14 +28,14 @@ const Auth0NavBar = () => {
     color: "#333333",
     lineHeight: "1.2",
     textAlign: "center",
-    paddingBottom: "26px"
+    paddingBottom: "26px",
   };
 
   const buttonWrapperStyle = {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    paddingTop: "13px"
+    paddingTop: "13px",
   };
 
   const buttonStyle = {
@@ -55,7 +53,7 @@ const Auth0NavBar = () => {
     background:
       "-webkit-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff)",
     transition: "all 0.4s",
-    border: "none"
+    border: "none",
   };
 
   return (
@@ -63,7 +61,7 @@ const Auth0NavBar = () => {
       <div style={wrapperStyle}>
         <span style={titleStyle}>Welcome</span>
         <div style={buttonWrapperStyle}>
-          <button style={buttonStyle} onClick={() => loginWithRedirect({})}>
+          <button style={buttonStyle} onClick={() => signInWithRedirect()}>
             login
           </button>
         </div>
@@ -72,4 +70,4 @@ const Auth0NavBar = () => {
   );
 };
 
-export default Auth0NavBar;
+export default SignIn;

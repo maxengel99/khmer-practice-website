@@ -1,31 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
-import Auth0NavBar from "./components/Auth0NavBar";
-import { useAuth0 } from "./auth0/react-auth0-spa";
+import SignIn from "./components/SignIn";
 import QuizArea from "./components/QuizArea";
-import { Router, Route, Switch } from "react-router-dom";
-import history from "./auth0/history";
-import PrivateRoute from "./components/PrivateRoute";
+import Profile from "./components/Profile";
+import { UserContext } from "./providers/UserProvider";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
-  const { loading, user } = useAuth0();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div className="App">
-      <Router history={history}>
-        <Switch>
-          <Route path="/" exact component={Auth0NavBar} />
-          <PrivateRoute
-            path="/practice"
-            component={() => <QuizArea user={user} />}
-          />
-        </Switch>
-      </Router>
-    </div>
+  const user = useContext(UserContext);
+  console.log(user);
+  return user ? (
+    <Router>
+      <Switch>
+        <Route path="/profile">
+          <Profile />
+        </Route>
+        <Route path="/">
+          <QuizArea />
+        </Route>
+      </Switch>
+    </Router>
+  ) : (
+    <SignIn />
   );
 }
 
