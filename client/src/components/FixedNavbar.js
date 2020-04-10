@@ -14,7 +14,9 @@ const FixedNavbar = () => {
   return (
     <div>
       <Navbar bg="light" variant="light">
-        <Navbar.Brand>Learn Khmer!</Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/practice">Learn Khmer!</Link>
+        </Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
             Signed in as:{" "}

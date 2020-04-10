@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../providers/Firebase";
+import FixedNavbar from "./FixedNavbar";
 
 export class Profile extends Component {
   static contextType = UserContext;
@@ -63,31 +64,34 @@ export class Profile extends Component {
     };
 
     return (
-      <div class="card" style={cardStyle}>
-        <img src={this.context.photoURL} alt="Profile" style={imgStyle} />
-        <h1 style={headerStyle}>{this.context.displayName}</h1>
-        <p class="title" style={titleStyle}>
-          {this.context.email}
-        </p>
-        <p style={paragraphStyle}>
-          Total Answers: {this.state.correct + this.state.incorrect}
-        </p>
-        <p style={paragraphStyle}>
-          Percent Correct:{" "}
-          {this.state.correct !== 0
-            ? (this.state.correct + this.state.incorrect) / this.state.correct
-            : 0}
-          {"%"}
-        </p>
-        <button
-          style={buttonStyle}
-          onClick={() => {
-            auth.signOut();
-            window.location.href = "/";
-          }}
-        >
-          Sign out
-        </button>
+      <div>
+        <FixedNavbar />
+        <div class="card" style={cardStyle}>
+          <img src={this.context.photoURL} alt="Profile" style={imgStyle} />
+          <h1 style={headerStyle}>{this.context.displayName}</h1>
+          <p class="title" style={titleStyle}>
+            {this.context.email}
+          </p>
+          <p style={paragraphStyle}>
+            Total Answers: {this.state.correct + this.state.incorrect}
+          </p>
+          <p style={paragraphStyle}>
+            Percent Correct:{" "}
+            {this.state.correct !== 0
+              ? (this.state.correct + this.state.incorrect) / this.state.correct
+              : 0}
+            {"%"}
+          </p>
+          <button
+            style={buttonStyle}
+            onClick={() => {
+              auth.signOut();
+              window.location.href = "/";
+            }}
+          >
+            Sign out
+          </button>
+        </div>
       </div>
     );
   }
