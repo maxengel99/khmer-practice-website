@@ -23,5 +23,4 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signInWithRedirect = () => {
   auth.signInWithRedirect(provider);
-  auth.getRedirectResult();
 };

@@ -5,13 +5,10 @@ import CorrectAnswer from "./CorrectAnswer";
 import FixedNavbar from "./FixedNavbar";
 import Definition from "./Definition";
 import { WordsArray } from "../word-list";
-import { UserContext } from "../providers/UserProvider";
 
 const khmer_words = Object.keys(WordsArray);
 
 export class QuizArea extends Component {
-  static contextType = UserContext;
-
   constructor(props) {
     super(props);
     this.state = {
@@ -45,6 +42,25 @@ export class QuizArea extends Component {
 
   handleAnswer = (answerValue) => {
     this.setState({ didAnswer: true, correct: answerValue.answerValue });
+
+    let requestInfo = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    if (answerValue.answerValue) {
+      requestInfo["body"] = JSON.stringify({
+        uid: this.props.uid,
+        success: true,
+      });
+    } else {
+      requestInfo["body"] = JSON.stringify({
+        uid: this.props.uid,
+        success: false,
+      });
+    }
+
+    fetch("/answer", requestInfo).then((response) => console.log(response));
   };
 
   render() {

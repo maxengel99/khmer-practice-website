@@ -2,7 +2,6 @@ const admin = require("firebase-admin");
 const functions = require("firebase-functions");
 const express = require("express");
 const bodyParser = require("body-parser");
-const request = require("request");
 
 admin.initializeApp(functions.config().firebase);
 
@@ -19,22 +18,48 @@ app.get("/api/getList", (req, res) => {
 app.get("/test", (req, res) => {
   res.send("HTTP GET Request");
 
-  admin
-    .database()
-    .ref("/TestMessages")
-    .set({ TestMessage: "GET Request 10" });
+  admin.database().ref("/TestMessages").set({ TestMessage: "GET Request 10" });
 });
 
+app.get("/user", (req, res) => {});
 app.post("/user", (req, res) => {
   console.log("Adding user if user does not exist");
-
-  res.send("HTTP Post request");
+  res.send("Adding user to the db");
   admin
     .database()
-    .ref("/users/" + req.body.email)
+    .ref("users/" + req.body.uid)
     .set({
-      name: req.body.name
+      email: req.body.email,
+      name: req.body.name,
+      photoURL: req.body.photoURL,
+      success: 0,
+      fail: 0,
     });
+});
+
+app.post("/answer", (req, res) => {
+  console.log("Submitting answer");
+  res.send("Submitting answer");
+
+  if (req.body.success) {
+    admin
+      .database()
+      .ref("users")
+      .child(req.body.uid)
+      .child("success")
+      .transaction(function (success) {
+        return (success || 0) + 1;
+      });
+  } else {
+    admin
+      .database()
+      .ref("users")
+      .child(req.body.uid)
+      .child("fail")
+      .transaction(function (fail) {
+        return (fail || 0) + 1;
+      });
+  }
 });
 
 app.get("/media", (req, res) => {

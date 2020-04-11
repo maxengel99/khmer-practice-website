@@ -61,7 +61,10 @@ const SignIn = () => {
       <div style={wrapperStyle}>
         <span style={titleStyle}>Welcome</span>
         <div style={buttonWrapperStyle}>
-          <button style={buttonStyle} onClick={() => signInWithRedirect()}>
+          <button
+            style={buttonStyle}
+            onClick={async () => await signInWithRedirect()}
+          >
             login with gmail
           </button>
         </div>

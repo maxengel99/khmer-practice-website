@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import "firebase/auth";
+import "firebase/firestore";
 import "./App.css";
 import SignIn from "./components/SignIn";
 import QuizArea from "./components/QuizArea";
@@ -17,7 +19,7 @@ function App() {
             <Profile />
           </Route>
           <Route path="/">
-            <QuizArea />
+            <QuizArea uid={user.uid} />
           </Route>
         </Switch>
       </Router>
