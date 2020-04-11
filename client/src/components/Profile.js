@@ -15,6 +15,23 @@ export class Profile extends Component {
     };
   }
 
+  componentDidMount() {
+    const requestInfo = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    console.log(this.context.uid);
+    fetch("/user?uid=" + this.context.uid, requestInfo)
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          correct: data.success,
+          incorrect: data.fail,
+        });
+      });
+  }
+
   render() {
     const cardStyle = {
       boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",

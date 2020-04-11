@@ -15,13 +15,16 @@ app.get("/api/getList", (req, res) => {
   console.log("Sent list of items");
 });
 
-app.get("/test", (req, res) => {
-  res.send("HTTP GET Request");
-
-  admin.database().ref("/TestMessages").set({ TestMessage: "GET Request 10" });
+app.get("/user", (req, res) => {
+  admin
+    .database()
+    .ref("users/" + req.query.uid)
+    .once("value")
+    .then((snapshot) => {
+      res.json(snapshot.val());
+    });
 });
 
-app.get("/user", (req, res) => {});
 app.post("/user", (req, res) => {
   console.log("Adding user if user does not exist");
   res.send("Adding user to the db");
@@ -60,21 +63,6 @@ app.post("/answer", (req, res) => {
         return (fail || 0) + 1;
       });
   }
-});
-
-app.get("/media", (req, res) => {
-  console.log("getting media file");
-  res.send(
-    "https://firebasestorage.googleapis.com/v0/b/khmer-practice-website.appspot.com/o/" +
-      req.query.word +
-      ".mp3?alt=media"
-  );
-  /*
-  request(
-    "https://firebasestorage.googleapis.com/v0/b/khmer-practice-website.appspot.com/o/" +
-      req.query.word +
-      ".mp3?alt=media"
-  ).pipe(res);*/
 });
 
 exports.app = functions.https.onRequest(app);
