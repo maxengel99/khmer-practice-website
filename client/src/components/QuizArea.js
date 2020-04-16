@@ -41,6 +41,7 @@ export class QuizArea extends Component {
   }
 
   handleAnswer = (answerValue) => {
+    console.log(answerValue.answerInput);
     this.setState({ didAnswer: true, correct: answerValue.answerValue });
 
     let requestInfo = {
@@ -52,11 +53,15 @@ export class QuizArea extends Component {
       requestInfo["body"] = JSON.stringify({
         uid: this.props.uid,
         success: true,
+        word: this.state.word,
+        answer: answerValue.answerInput,
       });
     } else {
       requestInfo["body"] = JSON.stringify({
         uid: this.props.uid,
+        word: this.state.word,
         success: false,
+        answer: answerValue.answerInput,
       });
     }
 

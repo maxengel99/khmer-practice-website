@@ -16,9 +16,15 @@ export class TextInput extends Component {
   keyPress(e) {
     if (e.keyCode === 13) {
       if (this.state.input === this.props.word) {
-        this.props.onSubmitAnswer({ answerValue: true });
+        this.props.onSubmitAnswer({
+          answerValue: true,
+          answerInput: this.state.input,
+        });
       } else {
-        this.props.onSubmitAnswer({ answerValue: false });
+        this.props.onSubmitAnswer({
+          answerValue: false,
+          answerInput: this.state.input,
+        });
       }
     }
   }
@@ -27,7 +33,7 @@ export class TextInput extends Component {
     if (nextProps.word !== this.state.word) {
       this.setState({
         input: "",
-        word: nextProps.word
+        word: nextProps.word,
       });
     }
   }
@@ -40,7 +46,7 @@ export class TextInput extends Component {
       fontSize: "1.5em",
       boxShadow: "3px 3px 0 #e1e1e1",
       boxSizing: "border-box",
-      textAlign: "center"
+      textAlign: "center",
     };
 
     const inputStyleCorrect = {
@@ -53,7 +59,7 @@ export class TextInput extends Component {
       textAlign: "center",
       transition: "backgroud-color 0.1s ease-in",
       backgroundColor: "#88cc00",
-      opacity: "1"
+      opacity: "1",
     };
 
     const inputStyleWrong = {
@@ -66,7 +72,7 @@ export class TextInput extends Component {
       textAlign: "center",
       transition: "backgroud-color 0.1s ease-in",
       backgroundColor: "#E00025",
-      opacity: "1"
+      opacity: "1",
     };
 
     let inputStyle;
@@ -82,7 +88,7 @@ export class TextInput extends Component {
     }
 
     const containerStyle = {
-      padding: "10px"
+      padding: "10px",
     };
 
     return (

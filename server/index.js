@@ -63,6 +63,15 @@ app.post("/answer", (req, res) => {
         return (fail || 0) + 1;
       });
   }
+
+  admin
+    .database()
+    .ref("users/" + req.body.uid + "/attempts/" + Date.now())
+    .set({
+      correct_word: req.body.word,
+      given_answer: req.body.answer,
+      correct: req.body.success,
+    });
 });
 
 exports.app = functions.https.onRequest(app);

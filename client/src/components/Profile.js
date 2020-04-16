@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { UserContext } from "../providers/UserProvider";
-import { auth } from "../providers/Firebase";
 import FixedNavbar from "./FixedNavbar";
 
 export class Profile extends Component {
@@ -65,7 +64,7 @@ export class Profile extends Component {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      float: "right",
+      float: "left",
       margin: "10px",
       padding: "0 20px",
       width: "20%",
@@ -95,19 +94,19 @@ export class Profile extends Component {
           <p style={paragraphStyle}>
             Percent Correct:{" "}
             {this.state.correct !== 0
-              ? (this.state.correct + this.state.incorrect) / this.state.correct
+              ? Math.round(
+                  (((this.state.correct + this.state.incorrect) /
+                    this.state.correct) *
+                    100) /
+                    100
+                ).toFixed(2)
               : 0}
             {"%"}
           </p>
-          <button
-            style={buttonStyle}
-            onClick={() => {
-              auth.signOut();
-              window.location.href = "/";
-            }}
-          >
-            Sign out
-          </button>
+          <div>
+            <button style={buttonStyle}>Download Summary</button>
+            <button style={buttonStyle}>Download Words</button>
+          </div>
         </div>
       </div>
     );
