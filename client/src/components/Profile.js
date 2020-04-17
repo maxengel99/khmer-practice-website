@@ -15,6 +15,7 @@ export class Profile extends Component {
     };
 
     this.downloadWords = this.downloadWords.bind(this);
+    this.downloadSummary = this.downloadSummary.bind(this);
   }
 
   downloadWords() {
@@ -33,13 +34,66 @@ export class Profile extends Component {
     element.click();
   }
 
+  downloadSummary() {
+    const requestInfo = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    let wordIncorrectPair = new Map();
+
+    fetch("/user?uid=" + this.context.uid, requestInfo)
+      .then((response) => response.json())
+      .then((data) => {
+        for (var attempt in data.attempts) {
+          if (!data.attempts[attempt]["correct"]) {
+            if (
+              !wordIncorrectPair.has(data.attempts[attempt]["correct_word"])
+            ) {
+              wordIncorrectPair.set(data.attempts[attempt]["correct_word"], 1);
+            } else {
+              wordIncorrectPair.set(
+                data.attempts[attempt]["correct_word"],
+                wordIncorrectPair.get(data.attempts[attempt]["correct_word"]) +
+                  1
+              );
+            }
+          }
+        }
+        let sortedWordMap = new Map(
+          Array.from(wordIncorrectPair).sort((a, b) => (a[0] > b[0] ? 1 : -1))
+        );
+
+        const element = document.createElement("a");
+        var wordsString = `You have ${this.state.correct} correct submissions.\n`;
+        wordsString += `You have ${this.state.incorrect} incorrect submissions.\n\n`;
+        wordsString += `Here are your most frequently missed words - \n`;
+
+        for (var [word, value] of sortedWordMap) {
+          console.log(word);
+          if (value > 1) {
+            wordsString += `${word}  has been answered incorrectly ${value} times\n`;
+          } else {
+            wordsString += `${word}  has been answered incorrectly ${value} time\n`;
+          }
+        }
+
+        const file = new Blob([wordsString], {
+          type: "text/plain",
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = "summary-file.txt";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        element.click();
+      });
+  }
+
   componentDidMount() {
     const requestInfo = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
 
-    console.log(this.context.uid);
     fetch("/user?uid=" + this.context.uid, requestInfo)
       .then((response) => response.json())
       .then((data) => {
@@ -123,10 +177,12 @@ export class Profile extends Component {
             {"%"}
           </p>
           <div>
-            <button style={buttonStyle} onClick={this.downloadWords}>
+            <button style={buttonStyle} onClick={this.downloadSummary}>
               Download Summary
             </button>
-            <button style={buttonStyle}>Download Words</button>
+            <button style={buttonStyle} onClick={this.downloadWords}>
+              Download Words
+            </button>
           </div>
         </div>
       </div>
