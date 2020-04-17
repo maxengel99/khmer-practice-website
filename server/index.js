@@ -2,12 +2,16 @@ const admin = require("firebase-admin");
 const functions = require("firebase-functions");
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
+var cors = require("cors");
 
 admin.initializeApp(functions.config().firebase);
 
 const app = express();
+app.use(cors());
 
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/api/getList", (req, res) => {
   var list = ["item1", "item2", "item3"];
@@ -15,7 +19,7 @@ app.get("/api/getList", (req, res) => {
   console.log("Sent list of items");
 });
 
-app.get("/user", (req, res) => {
+app.get("/api/user", (req, res) => {
   admin
     .database()
     .ref("users/" + req.query.uid)
@@ -25,7 +29,7 @@ app.get("/user", (req, res) => {
     });
 });
 
-app.post("/user", (req, res) => {
+app.post("/api/user", (req, res) => {
   console.log("Adding user if user does not exist");
   res.send("Adding user to the db");
   admin

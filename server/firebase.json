@@ -5,11 +5,15 @@
         "function": "app"
       },
       {
-        "source": "/user",
+        "source": "/api/user",
         "function": "app"
       },
       {
         "source": "/answer",
+        "function": "app"
+      },
+      {
+        "source": "/download/summary",
         "function": "app"
       }
     ],
