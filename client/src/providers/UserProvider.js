@@ -26,9 +26,10 @@ class UserProvider extends Component {
             photoURL: result.user.photoURL,
           }),
         };
-        fetch("/user", requestInfo)
-          .then()
-          .then((response) => console.log(response));
+        fetch(
+          "https://us-central1-khmer-practice-website.cloudfunctions.net/app/api/user",
+          requestInfo
+        ).then((response) => console.log(response));
       }
     });
   };

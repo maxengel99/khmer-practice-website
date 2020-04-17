@@ -65,7 +65,10 @@ export class QuizArea extends Component {
       });
     }
 
-    fetch("/answer", requestInfo).then((response) => console.log(response));
+    fetch(
+      "https://us-central1-khmer-practice-website.cloudfunctions.net/app/answer",
+      requestInfo
+    ).then((response) => console.log(response));
   };
 
   render() {

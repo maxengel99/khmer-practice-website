@@ -42,7 +42,11 @@ export class Profile extends Component {
 
     let wordIncorrectPair = new Map();
 
-    fetch("/user?uid=" + this.context.uid, requestInfo)
+    fetch(
+      "https://us-central1-khmer-practice-website.cloudfunctions.net/app/api/user?uid=" +
+        this.context.uid,
+      requestInfo
+    )
       .then((response) => response.json())
       .then((data) => {
         for (var attempt in data.attempts) {
@@ -94,7 +98,13 @@ export class Profile extends Component {
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch("/user?uid=" + this.context.uid, requestInfo)
+    console.log(this.context.uid);
+
+    fetch(
+      "https://us-central1-khmer-practice-website.cloudfunctions.net/app/api/user?uid=" +
+        this.context.uid,
+      requestInfo
+    )
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -167,11 +177,10 @@ export class Profile extends Component {
           <p style={paragraphStyle}>
             Percent Correct:{" "}
             {this.state.correct !== 0
-              ? Math.round(
-                  (((this.state.correct + this.state.incorrect) /
-                    this.state.correct) *
-                    100) /
-                    100
+              ? (
+                  (this.state.correct /
+                    (this.state.correct + this.state.incorrect)) *
+                  100
                 ).toFixed(2)
               : 0}
             {"%"}
