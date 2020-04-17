@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { UserContext } from "../providers/UserProvider";
 import FixedNavbar from "./FixedNavbar";
+import { WordsArray } from "../word-list";
 
 export class Profile extends Component {
   static contextType = UserContext;
@@ -12,6 +13,24 @@ export class Profile extends Component {
       incorrect: 0,
       savedWords: [],
     };
+
+    this.downloadWords = this.downloadWords.bind(this);
+  }
+
+  downloadWords() {
+    const element = document.createElement("a");
+    console.log(WordsArray);
+    var wordsString = "";
+    for (var word in WordsArray) {
+      wordsString += `${word}: "${WordsArray[word]}"\n`;
+    }
+    const file = new Blob([wordsString], {
+      type: "text/plain",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = "words-file.txt";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
   }
 
   componentDidMount() {
@@ -104,7 +123,9 @@ export class Profile extends Component {
             {"%"}
           </p>
           <div>
-            <button style={buttonStyle}>Download Summary</button>
+            <button style={buttonStyle} onClick={this.downloadWords}>
+              Download Summary
+            </button>
             <button style={buttonStyle}>Download Words</button>
           </div>
         </div>
