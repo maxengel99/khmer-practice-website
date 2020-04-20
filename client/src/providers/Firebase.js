@@ -22,5 +22,6 @@ export const firestore = firebase.firestore();
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signInWithRedirect = () => {
+  window.sessionStorage.setItem("pending", 1);
   auth.signInWithRedirect(provider);
 };

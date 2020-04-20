@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../providers/Firebase";
+import history from "../providers/History";
 
 const FixedNavbar = () => {
   const user = useContext(UserContext);
@@ -19,11 +20,11 @@ const FixedNavbar = () => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    float: "right",
     height: "30px",
     borderRadius: "10px",
     background: "rgba(0, 0, 0, 0.2)",
     border: "none",
+    margin: "2px",
   };
 
   return (
@@ -48,6 +49,14 @@ const FixedNavbar = () => {
               style={imgStyle}
               alt="Profile"
             />
+          </Navbar.Text>
+          <Navbar.Text>
+            <button
+              style={buttonStyle}
+              onClick={() => history.push("/profile")}
+            >
+              Profile
+            </button>
           </Navbar.Text>
           <Navbar.Text>
             <button
