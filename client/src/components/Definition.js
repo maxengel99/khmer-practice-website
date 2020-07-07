@@ -13,7 +13,7 @@ export class Definition extends Component {
     ) {
       this.setState({
         show: nextProps.show,
-        definition: nextProps.definition
+        definition: nextProps.definition,
       });
     }
   }
@@ -22,11 +22,19 @@ export class Definition extends Component {
     const style = {
       width: "100%",
       textAlign: "center",
-      fontSize: "30px"
+      fontSize: "30px",
+    };
+    const styleTwo = {
+      fontSize: "20px",
     };
     return (
       <div style={style}>
-        {this.state.show && <p>{this.state.definition}</p>}
+        {this.state.show && (
+          <div>
+            <p>{this.state.definition}</p>
+            <p style={styleTwo}>Press enter to continue</p>
+          </div>
+        )}
       </div>
     );
   }
